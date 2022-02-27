@@ -16,7 +16,7 @@ private:
 
     int binaryNumber;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    bool even;
+    bool evenParityBool;
     int parityBit1;
     int parityBit2;
     int parityBit4;
@@ -25,12 +25,12 @@ public:
 
     Hamming();
     bool verify(string parity);
+    void generateHammingCode(string binaryNumberString);
     int xorOperation(int bit1, int bit2);
-    void numberToVector();
     int getBinaryNumber() const;
-    void setBinaryNumberAndVector(string binaryNumber);
-
-    void setBinaryNumberVector();
+    void setBinaryNumber(string binaryNumber);
+    void generateBinaryNumberVector();
+    void calculateParityBit(int bit);
 };
 
 

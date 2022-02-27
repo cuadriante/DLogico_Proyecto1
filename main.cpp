@@ -33,7 +33,7 @@ int main() {
                     cout << "The number in the octal form is: " << num.decimal_to_octal() << endl;
                     if (inputParity()){
                         cout << "Great!" << endl;
-                        hamming.setBinaryNumberAndVector(num.decimal_to_binary());
+                        hamming.generateHammingCode(num.decimal_to_binary());
                     } else {
                         inputParity();
                     }
@@ -60,7 +60,7 @@ int main() {
 }
 
 bool inputParity() {
-    cout << "Please choose between odd parity and even parity (O/E)" << endl;
+    cout << "Please choose between odd parity and evenParityBool parity (O/E)" << endl;
     string parityInput; //string to receive any input the user puts
     cin >> parityInput;
     //Hamming hamming;
