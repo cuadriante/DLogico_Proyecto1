@@ -12,6 +12,7 @@ public:
     int length{}; //length of the input
     int num_decimal{};
     string num_binary;
+
     int num_octal{};
 
     bool verify (string input);

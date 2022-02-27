@@ -3,4 +3,4 @@ project(DLogico_Proyecto1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(DLogico_Proyecto1 main.cpp Number.cpp Number.h)
+add_executable(DLogico_Proyecto1 main.cpp Number.cpp Number.h Hamming.cpp Hamming.h)

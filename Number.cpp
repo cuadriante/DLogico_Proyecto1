@@ -159,5 +159,5 @@ string Number::decimal_to_binary(){
         dividend = dividend / 2;
     }
     num_binary = result;
-    return result;
+    return num_binary;
 }

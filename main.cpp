@@ -1,7 +1,11 @@
 #include <iostream>
 #include "Number.h"
+#include "Hamming.h"
+
+bool inputParity();
 
 using namespace std;
+Hamming hamming;
 
 int main() {
     bool on = true; //Boolean to indicate whether the user still wishes to use the program
@@ -16,16 +20,24 @@ int main() {
         switch(option){ //Navigation of the main menu
             case 1: //Hexadecimal input chosen
             {
-                cout<<"Please input your hexadecimal input from 000 to FFF"<<endl;
+                cout<<"Please type your hexadecimal input from 000 to FFF"<<endl;
                 string input; //string to receive any input the user puts
                 Number num;
                 cin >> input;
 
                 if (num.verify(input)){ //Case when a valid input is used
-                    cout<<"Awesome next step lets go"<<endl;
+
+                    cout<<"Awesome! next step lets go"<<endl;
                     cout << "The number in the decimal form is: " << num.hex_to_decimal(input) << endl; //the valid hexadecimal input in decimal
                     cout << "The number in the binary form is: " << num.decimal_to_binary() << endl;
                     cout << "The number in the octal form is: " << num.decimal_to_octal() << endl;
+                    if (inputParity()){
+                        cout << "Great!" << endl;
+                        hamming.setBinaryNumberAndVector(num.decimal_to_binary());
+                    } else {
+                        inputParity();
+                    }
+
                 }
                 else { //Case when the users input is invalid
                     cout<<"Please input a valid number"<<endl;
@@ -45,4 +57,17 @@ int main() {
     cout<<"The program will now shut down"<<endl;
 
     return 0;
+}
+
+bool inputParity() {
+    cout << "Please choose between odd parity and even parity (O/E)" << endl;
+    string parityInput; //string to receive any input the user puts
+    cin >> parityInput;
+    //Hamming hamming;
+    if (hamming.verify(parityInput)){
+        return true;
+    } else {
+        cout << "Invalid parity." << endl;
+        return false;
+    }
 }
