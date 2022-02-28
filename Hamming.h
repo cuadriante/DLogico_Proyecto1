@@ -17,6 +17,7 @@ private:
     int binaryNumber;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> binaryNumberVectorWithParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> binaryNumberVectorWithoutParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> parity1BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     vector<int> parity2BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     vector<int> parity4BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
@@ -36,7 +37,7 @@ public:
     int getBinaryNumber() const;
     void setBinaryNumber(string binaryNumber);
     void generateBinaryNumberVector();
-    void generateBinaryNumberVectorWithParity();
+    void generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity);
     void generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity);
     void calculateParityBit(int bit);
     void printVectorContents(string vectorName, vector<int> vector);
