@@ -131,7 +131,7 @@ void Hamming::calculateParityBit(int bit) {
 void Hamming::generateBinaryNumberVectorWithParity() {
     //cout << "Generating binary number vector . . . " << endl;
     int tempBinaryNumber = binaryNumber;
-    for (int i = 14; i >= 0; i--){
+    for (int i = 15; i >= 0; i--){
         if (i == 0 || i == 1 || i == 3 || i == 7){
             switch(i){
                 case 0:
@@ -160,7 +160,7 @@ void Hamming::generateParityVectorWithParity(int bit, vector<int> vec, vector<in
     int tempBinaryNumber = binaryNumber;
     int index = 0;
 
-    for (int i = 0; i <= 14; i++){
+    for (int i = 0; i <= 15; i++){
         if (i == 0 || i == 1 || i == 3 || i == 7){
             if (i == bit - 1){
                 switch(i){
@@ -190,7 +190,13 @@ void Hamming::generateParityVectorWithParity(int bit, vector<int> vec, vector<in
 void Hamming::printVectorContents(string vectorName, vector<int> vector) {
     cout << vectorName << ": ";
     for(int element: vector){
-        cout << element;
+        if (element != -1){
+            cout << " ";
+        }
+        cout << element << " ";
+//        if (element != -1){
+//            cout << " ";
+//        }
     }
     cout << endl;
 }
