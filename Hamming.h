@@ -17,10 +17,10 @@ private:
     int binaryNumber;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> binaryNumberVectorWithParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    vector<int> parity1BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    vector<int> parity2BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    vector<int> parity4BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    vector<int> parity8BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> parity1BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    vector<int> parity2BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    vector<int> parity4BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    vector<int> parity8BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     bool evenParityBool;
     int parityBit1;
     int parityBit2;
@@ -37,8 +37,10 @@ public:
     void setBinaryNumber(string binaryNumber);
     void generateBinaryNumberVector();
     void generateBinaryNumberVectorWithParity();
-    void generateParityVectorWithParity(int parity);
+    void generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity);
     void calculateParityBit(int bit);
+    void printVectorContents(string vectorName, vector<int> vector);
+
 };
 
 
