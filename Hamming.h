@@ -41,6 +41,7 @@ public:
     void calculateParityBit(int bit);
     void printVectorContents(string vectorName, vector<int> vector);
 
+    void printParityTable();
 };
 
 

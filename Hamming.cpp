@@ -18,12 +18,9 @@ void Hamming::generateHammingCode(string binaryNumberString) {
     calculateParityBit(4);
     calculateParityBit(8);
     generateBinaryNumberVectorWithParity();
-    printVectorContents("p1    ", parity1BinaryNumberVector);
-    printVectorContents("p2    ", parity2BinaryNumberVector);
-    printVectorContents("p4    ", parity4BinaryNumberVector);
-    printVectorContents("p8    ", parity8BinaryNumberVector);
-    printVectorContents("number", binaryNumberVectorWithParity);
+    printParityTable();
 }
+
 
 bool Hamming::verify(string parity) {
     if (parity == "o" || parity == "O"){
@@ -189,15 +186,41 @@ void Hamming::generateParityVectorWithParity(int bit, vector<int> vec, vector<in
 
 void Hamming::printVectorContents(string vectorName, vector<int> vector) {
     cout << vectorName << ": ";
-    for(int element: vector){
-        if (element != -1){
+    for(int i = 0; i <= 15; i++){
+        if (i > 13){
             cout << " ";
         }
-        cout << element << " ";
-//        if (element != -1){
-//            cout << " ";
-//        }
+        if (vector.at(i) != -1){
+            cout << " " << vector.at(i) << " ";
+        } else {
+            cout << "   ";
+        }
+
     }
     cout << endl;
 }
 
+void Hamming::printParityTable() {
+    int pIndex = 1;
+    int dIndex = 1;
+
+    cout << endl;
+    cout << "   Tabla No. 1: Calculo de bits de paridad en codigo Hamming" << endl;
+    cout << "             ";
+    for (int i = 1; i <= 16; i++){
+        if (i == 1 || i == 2 || i == 4 || i == 8){
+            cout << "p" << pIndex;
+            pIndex = pIndex*2;
+        }   else {
+            cout << "d" << dIndex;
+            dIndex++;
+        }
+        cout << " ";
+    }
+    cout << endl;
+    printVectorContents("p1         ", parity1BinaryNumberVector);
+    printVectorContents("p2         ", parity2BinaryNumberVector);
+    printVectorContents("p4         ", parity4BinaryNumberVector);
+    printVectorContents("p8         ", parity8BinaryNumberVector);
+    printVectorContents("con paridad", binaryNumberVectorWithParity);
+}
