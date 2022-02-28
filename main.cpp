@@ -60,7 +60,7 @@ int main() {
 }
 
 bool inputParity() {
-    cout << "Please choose between odd parity and evenParityBool parity (O/E)" << endl;
+    cout << "Please choose between odd parity and even parity (O/E)" << endl;
     string parityInput; //string to receive any input the user puts
     cin >> parityInput;
     //Hamming hamming;

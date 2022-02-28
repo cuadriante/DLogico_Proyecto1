@@ -75,7 +75,8 @@ void Hamming::calculateParityBit(int bit) {
             }
         }
     }
-    if (oneBitSum/2 == 0){
+    cout << "Sum = "<< oneBitSum << "  . . .";
+    if (oneBitSum%2 == 0){
         if (evenParityBool){
             parity = 1;
         }
@@ -84,7 +85,7 @@ void Hamming::calculateParityBit(int bit) {
             parity = 1;
         }
     }
-    cout << parity << endl;
+    cout << "Parity:" << parity << endl;
 
 }
 
