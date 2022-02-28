@@ -16,10 +16,16 @@ private:
 
     int binaryNumber;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> binaryNumberVectorWithParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> parity1BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> parity2BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> parity4BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> parity8BinaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     bool evenParityBool;
     int parityBit1;
     int parityBit2;
     int parityBit4;
+    int parityBit8;
 
 public:
 
@@ -30,6 +36,8 @@ public:
     int getBinaryNumber() const;
     void setBinaryNumber(string binaryNumber);
     void generateBinaryNumberVector();
+    void generateBinaryNumberVectorWithParity();
+    void generateParityVectorWithParity(int parity);
     void calculateParityBit(int bit);
 };
 
