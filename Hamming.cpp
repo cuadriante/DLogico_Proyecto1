@@ -16,7 +16,7 @@ void Hamming::generateHammingCode(string binaryNumberString) {
     calculateParityBit(1);
     calculateParityBit(2);
     calculateParityBit(4);
-    //calculateParityBit(8);
+    calculateParityBit(8);
 
 }
 
@@ -61,31 +61,40 @@ void Hamming::generateBinaryNumberVector() {
 }
 
 void Hamming::calculateParityBit(int bit) {
-    cout << "Calculating Parity Bit " << bit << " . . . ";
+    cout << "Calculating Parity Bit " << bit << " . . . " << endl;
     int parity = 0;
     int oneBitSum = 0;
-    for (int i = 0; i <= binaryNumberVector.size() - 1; i ++){
-        i = i + bit - 1;
+    int increment = bit*2;
+    int i = bit - 1;
+    while (i <= binaryNumberVector.size() - 1) {
         for (int e = i; e <= i + bit - 1; e++) {
-            if (e == binaryNumberVector.size() - 1){
-                break;
-            }
+            cout << "databit " << e << ": " << binaryNumberVector.at(e) << endl;
             if (binaryNumberVector.at(e) == 1) {
                 oneBitSum++;
             }
+            cout << "sum: " << oneBitSum << endl;
+            if (e == binaryNumberVector.size() - 1) {
+                break;
+            }
         }
+        i = i + increment;
     }
-    cout << "Sum = "<< oneBitSum << "  . . .";
+    cout << "Final sum = "<< oneBitSum << "  . . .";
     if (oneBitSum%2 == 0){
         if (evenParityBool){
+            cout << " Even ";
             parity = 1;
+        } else{
+            cout << " Odd ";
         }
     } else {
         if (!evenParityBool){
+            cout << " Odd ";
             parity = 1;
+        } else {
+            cout << " Even ";
         }
     }
-    cout << "Parity:" << parity << endl;
-
+    cout << "Parity: " << parity << endl;
 }
 
