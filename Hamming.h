@@ -24,6 +24,7 @@ private:
     vector<int> parity2BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     vector<int> parity4BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     vector<int> parity8BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    vector<int> incorrectBitVector;
     bool evenParityBool;
     int parityBit1;
     int parityBit2;
@@ -33,6 +34,7 @@ private:
     int newParityBit2;
     int newParityBit4;
     int newParityBit8;
+    int incorrectBit;
 
 public:
 
@@ -48,7 +50,7 @@ public:
     void printVectorContents(string vectorName, vector<int> vector, bool parityTest);
     void modifyDataBit(int position);
     void modifyDataBitVector(int position, vector<int> *vec);
-    void parityTest(int parity1, int parity2);
+    void parityTest(int parity1, int parity2, int bit);
 
     void printParityTable1();
     void printParityTable2();

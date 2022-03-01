@@ -11,7 +11,7 @@ Hamming::Hamming() {
 
 void Hamming::generateHammingCode(string bn) {
     cout << "Calculating Hamming Code for " << bn << " . . . " << endl;
-    //initialization();
+    initialization();
     setBinaryNumber(bn);
     calculateParityBit(1, &parityBit1);
     calculateParityBit(2, &parityBit2);
@@ -36,6 +36,8 @@ void Hamming::initialization() {
     newParityBit2 = 0;
     newParityBit4 = 0;
     newParityBit8 = 0;
+    incorrectBitVector = {};
+    incorrectBit = 0;
 }
 
 void Hamming::generateHammingCode() {
@@ -282,15 +284,11 @@ void Hamming::modifyDataBitVector(int position, vector<int> *vec) {
     if (vec->size() == 12){
         for (int i = 0; i <= 11; i++){
             if (i == position){
-   //             vec->at(i) = 5;
                 if (vec->at(i) == 0){
                     vec->at(i) = 1;
                 } else {
                     vec->at(i) = 0;
                 }
-//                if (vec->at(i) == 1){
-//                    vec->at(i) = 0;
-//                }
                 break;
             }
         }
@@ -335,19 +333,29 @@ void Hamming::printParityTable2() {
     printVectorContents("no   parity", binaryNumberVectorWithoutParity, true);
     cout << "         1" << endl;
     printVectorContents("p1         ", parity1BinaryNumberVector, true);
-    parityTest(parityBit1, newParityBit1);
+    parityTest(parityBit1, newParityBit1, 1);
     printVectorContents("p2         ", parity2BinaryNumberVector, true);
-    parityTest(parityBit2, newParityBit2);
+    parityTest(parityBit2, newParityBit2, 2);
     printVectorContents("p4         ", parity4BinaryNumberVector, true);
-    parityTest(parityBit4, newParityBit4);
+    parityTest(parityBit4, newParityBit4, 4);
     printVectorContents("p8         ", parity8BinaryNumberVector, true);
-    parityTest(parityBit8, newParityBit8);
+    parityTest(parityBit8, newParityBit8, 8);
     printVectorContents("with parity", binaryNumberVectorWithParity, false);
+    cout << "Incorrect bits: ";
+    for (int i = 0; i <= incorrectBitVector.size() - 1; i++){
+        cout << incorrectBitVector.at(i);
+        if (i != incorrectBitVector.size() - 1){
+            cout << " + ";
+        }
+    }
+    cout << " = " << incorrectBit << endl << "Incorrect data bit position: " << incorrectBit;
 }
 
-void Hamming::parityTest(int parity1, int parity2) {
+void Hamming::parityTest(int parity1, int parity2, int bit) {
     if (parity1 != parity2){
         cout << "     Error  ";
+        incorrectBit = incorrectBit + bit; // adds incorrect bit to sum to find incorrect bit position
+        incorrectBitVector.push_back(bit);
     } else {
         cout << "     Correct";
     }
