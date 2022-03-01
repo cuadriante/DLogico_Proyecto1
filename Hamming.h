@@ -5,6 +5,7 @@
 #ifndef DLOGICO_PROYECTO1_HAMMING_H
 #define DLOGICO_PROYECTO1_HAMMING_H
 #include <string>
+#include <sstream>
 #include <iostream>
 #include <vector>
 
@@ -15,6 +16,7 @@ class Hamming {
 private:
     string initialBinaryNumberString;
     int binaryNumber;
+    vector<int> binaryNumberCharVector;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> binaryNumberVectorWithParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> binaryNumberVectorWithoutParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -36,11 +38,11 @@ public:
 
     Hamming();
     bool verify(string parity);
-    void generateHammingCode(string binaryNumberString);
+    void generateHammingCode(string bn);
     void generateHammingCode();
     int xorOperation(int bit1, int bit2);
     int getBinaryNumber() const;
-    void setBinaryNumber(string binaryNumber);
+    void setBinaryNumber(string bn);
     void generateBinaryNumberVector();
     void generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity);
     void generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity);
@@ -52,6 +54,8 @@ public:
 
     void printParityTable1();
     void printParityTable2();
+
+    void initialization();
 };
 
 

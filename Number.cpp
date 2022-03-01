@@ -151,10 +151,10 @@ string Number::decimal_to_binary(){
     while (dividend != 0) {
         remainder = dividend % 2;
         if (remainder == 0){
-            result = '0' + result;
+            result = "0 " + result;
         }
         else{
-            result = '1' + result;
+            result = "1 " + result ;
         }
         dividend = dividend / 2;
     }

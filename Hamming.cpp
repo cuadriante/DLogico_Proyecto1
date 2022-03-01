@@ -9,10 +9,10 @@ Hamming::Hamming() {
 
 }
 
-void Hamming::generateHammingCode(string binaryNumberString) {
+void Hamming::generateHammingCode(string bn) {
     cout << "Calculating Hamming Code for " << binaryNumber << " . . . " << endl;
-    setBinaryNumber(binaryNumberString);
-    generateBinaryNumberVector();
+    //initialization();
+    setBinaryNumber(bn);
     calculateParityBit(1, &parityBit1);
     calculateParityBit(2, &parityBit2);
     calculateParityBit(4, &parityBit4);
@@ -20,6 +20,22 @@ void Hamming::generateHammingCode(string binaryNumberString) {
     generateBinaryNumberVectorWithParity(true, &binaryNumberVectorWithParity);
     generateBinaryNumberVectorWithParity(false, &binaryNumberVectorWithoutParity);
     printParityTable1();
+}
+
+void Hamming::initialization() {
+    binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    parity1BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity2BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity4BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity8BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parityBit1 = 0;
+    parityBit2 = 0;
+    parityBit4 = 0;
+    parityBit8 = 0;
+    newParityBit1 = 0;
+    newParityBit2 = 0;
+    newParityBit4 = 0;
+    newParityBit8 = 0;
 }
 
 void Hamming::generateHammingCode() {
@@ -60,19 +76,49 @@ int Hamming::getBinaryNumber() const {
     return binaryNumber;
 }
 
-void Hamming::setBinaryNumber(string binaryNumber) {
-    Hamming::binaryNumber = stoi(binaryNumber);
+void Hamming::setBinaryNumber(string bn) {
+    vector<char> v;
+    copy(bn.begin(), bn.end(), std::back_inserter(binaryNumberCharVector));
+   // Hamming::binaryNumber = stoi(bn);
+    stringstream iss(bn);
+    int number;
+    std::vector<int> intVector;
+    while ( iss >> number )
+        intVector.push_back(number);
+
+
+    int i = 11;
+    int condition = i - intVector.size();
+    int index = intVector.size() - 1;
+    while (i >= 0){
+        if (i <= condition){
+            break;
+        } else {
+            binaryNumberVector.at(i) = (int) intVector.at(index);
+            index--;
+        }
+        i--;
+    }
+//    for (int i = 11; i >= 0; i--){
+//        if (i == condition){
+//            break;
+//        } else {
+//            //int currentBit = tempBinaryNumber % 10;
+//            binaryNumberVector.at(i) = (int) intVector.at(i);
+//            //tempBinaryNumber = tempBinaryNumber/10;
+//        }
+//    }
 
 }
 
 void Hamming::generateBinaryNumberVector() {
     cout << "Generating binary number vector . . . " << endl;
-    int tempBinaryNumber = binaryNumber;
+    //int tempBinaryNumber = binaryNumber;
 
-    for (int i = 11; i >= 0; i--){
-        int currentBit = tempBinaryNumber % 10;
-        binaryNumberVector.at(i) = currentBit;
-        tempBinaryNumber = tempBinaryNumber/10;
+    for (int i = binaryNumberCharVector.size() - 1; i >= 0; i--){
+        //int currentBit = tempBinaryNumber % 10;
+        binaryNumberVector.at(i) = (int) binaryNumberCharVector.at(i);
+        //tempBinaryNumber = tempBinaryNumber/10;
     }
 
 }
