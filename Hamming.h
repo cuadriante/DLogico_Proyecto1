@@ -40,8 +40,6 @@ public:
     bool verify(string parity);
     void generateHammingCode(string bn);
     void generateHammingCode();
-    int xorOperation(int bit1, int bit2);
-    int getBinaryNumber() const;
     void setBinaryNumber(string bn);
     void generateBinaryNumberVector();
     void generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity);

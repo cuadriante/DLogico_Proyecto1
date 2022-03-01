@@ -40,6 +40,8 @@ int main() {
                         cin >> pos;
                         if (1 <= pos && pos <= 12){
                             hamming.modifyDataBit(pos);
+                        } else {
+                            cout << "Invalid position." << endl;
                         }
 
 

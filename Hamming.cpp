@@ -10,7 +10,7 @@ Hamming::Hamming() {
 }
 
 void Hamming::generateHammingCode(string bn) {
-    cout << "Calculating Hamming Code for " << binaryNumber << " . . . " << endl;
+    cout << "Calculating Hamming Code for " << bn << " . . . " << endl;
     //initialization();
     setBinaryNumber(bn);
     calculateParityBit(1, &parityBit1);
@@ -64,16 +64,6 @@ bool Hamming::verify(string parity) {
     } else {
         return false;
     }
-}
-
-int Hamming::xorOperation(int bit1, int bit2) {
-    int result = bit1 ^ bit2; // xor
-    cout << result << endl;
-    return result;
-}
-
-int Hamming::getBinaryNumber() const {
-    return binaryNumber;
 }
 
 void Hamming::setBinaryNumber(string bn) {
@@ -144,7 +134,7 @@ void Hamming::calculateParityBit(int bit, int *parityBit) {
         }
         i = i + increment;
     }
-   // cout << "Final sum = "<< oneBitSum << "  . . .";
+    cout << "p" << bit;
     if (oneBitSum%2 == 0){
         if (evenParityBool){
             cout << " Even ";
@@ -260,7 +250,7 @@ void Hamming::printParityTable1() {
     int dIndex = 1;
 
     cout << endl;
-    cout << "       Table No. 1: Parity bit Calculation with Hamming Code" << endl;
+    cout << "       Table No. 1: Parity bit Calculation with Hamming Code" << endl << endl;
     cout << "             ";
     for (int i = 1; i <= 16; i++){
         if (i == 1 || i == 2 || i == 4 || i == 8){
@@ -295,10 +285,13 @@ void Hamming::modifyDataBitVector(int position, vector<int> *vec) {
    //             vec->at(i) = 5;
                 if (vec->at(i) == 0){
                     vec->at(i) = 1;
-                }
-                if (vec->at(i) == 1){
+                } else {
                     vec->at(i) = 0;
                 }
+//                if (vec->at(i) == 1){
+//                    vec->at(i) = 0;
+//                }
+                break;
             }
         }
     } else {
@@ -326,7 +319,7 @@ void Hamming::printParityTable2() {
     int dIndex = 1;
 
     cout << endl;
-    cout << "               Table No.2: Parity bit Verification with Hamming Code" << endl;
+    cout << "                    Table No.2: Parity bit Verification with Hamming Code" << endl << endl;
     cout << "             ";
     for (int i = 1; i <= 16; i++){
         if (i == 1 || i == 2 || i == 4 || i == 8){
@@ -339,7 +332,8 @@ void Hamming::printParityTable2() {
         cout << " ";
     }
     cout << "   Parity Test    Parity Bit" << endl;
-    printVectorContents("no   parity", binaryNumberVectorWithoutParity, false);
+    printVectorContents("no   parity", binaryNumberVectorWithoutParity, true);
+    cout << "         1" << endl;
     printVectorContents("p1         ", parity1BinaryNumberVector, true);
     parityTest(parityBit1, newParityBit1);
     printVectorContents("p2         ", parity2BinaryNumberVector, true);
