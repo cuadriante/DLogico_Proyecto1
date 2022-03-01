@@ -33,7 +33,7 @@ void Hamming::generateHammingCode() {
     calculateParityBit(8, &newParityBit8);
     generateBinaryNumberVectorWithParity(true, &binaryNumberVectorWithParity);
     generateBinaryNumberVectorWithParity(false, &binaryNumberVectorWithoutParity);
-    printParityTable1();
+    printParityTable2();
 }
 
 
@@ -192,7 +192,7 @@ void Hamming::generateParityVectorWithParity(int bit, vector<int> vec, vector<in
     }
 }
 
-void Hamming::printVectorContents(string vectorName, vector<int> vector) {
+void Hamming::printVectorContents(string vectorName, vector<int> vector, bool parityTest) {
     cout << vectorName << ": ";
     for(int i = 0; i <= 15; i++){
         if (i > 13){
@@ -203,9 +203,10 @@ void Hamming::printVectorContents(string vectorName, vector<int> vector) {
         } else {
             cout << "   ";
         }
-
     }
-    cout << endl;
+    if (!parityTest){
+        cout << endl;
+    }
 }
 
 void Hamming::printParityTable1() {
@@ -226,12 +227,12 @@ void Hamming::printParityTable1() {
         cout << " ";
     }
     cout << endl;
-    printVectorContents("no   parity", binaryNumberVectorWithoutParity);
-    printVectorContents("p1         ", parity1BinaryNumberVector);
-    printVectorContents("p2         ", parity2BinaryNumberVector);
-    printVectorContents("p4         ", parity4BinaryNumberVector);
-    printVectorContents("p8         ", parity8BinaryNumberVector);
-    printVectorContents("with parity", binaryNumberVectorWithParity);
+    printVectorContents("no   parity", binaryNumberVectorWithoutParity, false);
+    printVectorContents("p1         ", parity1BinaryNumberVector, false);
+    printVectorContents("p2         ", parity2BinaryNumberVector, false);
+    printVectorContents("p4         ", parity4BinaryNumberVector, false);
+    printVectorContents("p8         ", parity8BinaryNumberVector, false);
+    printVectorContents("with parity", binaryNumberVectorWithParity, false);
 }
 
 void Hamming::modifyDataBit(int position) {
@@ -279,7 +280,7 @@ void Hamming::printParityTable2() {
     int dIndex = 1;
 
     cout << endl;
-    cout << "       Table No. 1: Parity bit Calculation with Hamming Code" << endl;
+    cout << "               Table No.2: Parity bit Verification with Hamming Code" << endl;
     cout << "             ";
     for (int i = 1; i <= 16; i++){
         if (i == 1 || i == 2 || i == 4 || i == 8){
@@ -291,13 +292,27 @@ void Hamming::printParityTable2() {
         }
         cout << " ";
     }
-    cout << endl;
-    printVectorContents("no   parity", binaryNumberVectorWithoutParity);
-    printVectorContents("p1         ", parity1BinaryNumberVector);
-    printVectorContents("p2         ", parity2BinaryNumberVector);
-    printVectorContents("p4         ", parity4BinaryNumberVector);
-    printVectorContents("p8         ", parity8BinaryNumberVector);
-    printVectorContents("with parity", binaryNumberVectorWithParity);
+    cout << "   Parity Test    Parity Bit" << endl;
+    printVectorContents("no   parity", binaryNumberVectorWithoutParity, false);
+    printVectorContents("p1         ", parity1BinaryNumberVector, true);
+    parityTest(parityBit1, newParityBit1);
+    printVectorContents("p2         ", parity2BinaryNumberVector, true);
+    parityTest(parityBit2, newParityBit2);
+    printVectorContents("p4         ", parity4BinaryNumberVector, true);
+    parityTest(parityBit4, newParityBit4);
+    printVectorContents("p8         ", parity8BinaryNumberVector, true);
+    parityTest(parityBit8, newParityBit8);
+    printVectorContents("with parity", binaryNumberVectorWithParity, false);
+}
+
+void Hamming::parityTest(int parity1, int parity2) {
+    if (parity1 != parity2){
+        cout << "     Error  ";
+    } else {
+        cout << "     Correct";
+    }
+    cout << "            " << parity2 << "   " << endl;
+
 }
 
 

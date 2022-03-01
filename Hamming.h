@@ -45,9 +45,10 @@ public:
     void generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity);
     void generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity);
     void calculateParityBit(int bit, int *parityBit);
-    void printVectorContents(string vectorName, vector<int> vector);
+    void printVectorContents(string vectorName, vector<int> vector, bool parityTest);
     void modifyDataBit(int position);
     void modifyDataBitVector(int position, vector<int> *vec);
+    void parityTest(int parity1, int parity2);
 
     void printParityTable1();
     void printParityTable2();
