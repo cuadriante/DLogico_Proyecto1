@@ -13,7 +13,7 @@ using namespace std;
 
 class Hamming {
 private:
-
+    string initialBinaryNumberString;
     int binaryNumber;
     vector<int> binaryNumberVector = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     vector<int> binaryNumberVectorWithParity = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -27,22 +27,30 @@ private:
     int parityBit2;
     int parityBit4;
     int parityBit8;
+    int newParityBit1;
+    int newParityBit2;
+    int newParityBit4;
+    int newParityBit8;
 
 public:
 
     Hamming();
     bool verify(string parity);
     void generateHammingCode(string binaryNumberString);
+    void generateHammingCode();
     int xorOperation(int bit1, int bit2);
     int getBinaryNumber() const;
     void setBinaryNumber(string binaryNumber);
     void generateBinaryNumberVector();
     void generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity);
     void generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity);
-    void calculateParityBit(int bit);
+    void calculateParityBit(int bit, int *parityBit);
     void printVectorContents(string vectorName, vector<int> vector);
+    void modifyDataBit(int position);
+    void modifyDataBitVector(int position, vector<int> *vec);
 
-    void printParityTable();
+    void printParityTable1();
+    void printParityTable2();
 };
 
 

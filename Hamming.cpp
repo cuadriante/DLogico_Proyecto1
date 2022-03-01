@@ -13,13 +13,27 @@ void Hamming::generateHammingCode(string binaryNumberString) {
     cout << "Calculating Hamming Code for " << binaryNumber << " . . . " << endl;
     setBinaryNumber(binaryNumberString);
     generateBinaryNumberVector();
-    calculateParityBit(1);
-    calculateParityBit(2);
-    calculateParityBit(4);
-    calculateParityBit(8);
+    calculateParityBit(1, &parityBit1);
+    calculateParityBit(2, &parityBit2);
+    calculateParityBit(4, &parityBit4);
+    calculateParityBit(8, &parityBit8);
     generateBinaryNumberVectorWithParity(true, &binaryNumberVectorWithParity);
     generateBinaryNumberVectorWithParity(false, &binaryNumberVectorWithoutParity);
-    printParityTable();
+    printParityTable1();
+}
+
+void Hamming::generateHammingCode() {
+    parity1BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity2BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity4BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    parity8BinaryNumberVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+    calculateParityBit(1, &newParityBit1);
+    calculateParityBit(2, &newParityBit2);
+    calculateParityBit(4, &newParityBit4);
+    calculateParityBit(8, &newParityBit8);
+    generateBinaryNumberVectorWithParity(true, &binaryNumberVectorWithParity);
+    generateBinaryNumberVectorWithParity(false, &binaryNumberVectorWithoutParity);
+    printParityTable1();
 }
 
 
@@ -63,73 +77,65 @@ void Hamming::generateBinaryNumberVector() {
 
 }
 
-void Hamming::calculateParityBit(int bit) {
-    cout << "Calculating Parity Bit " << bit << " . . . " << endl;
-    int parity = 0;
+void Hamming::calculateParityBit(int bit, int *parityBit) {
+    //cout << "Calculating Parity Bit " << bit << " . . . " << endl;
+    *parityBit = 0;
     vector<int> parityVector = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     int oneBitSum = 0;
     int increment = bit*2;
     int i = bit - 1;
     while (i <= binaryNumberVector.size() - 1) {
         for (int e = i; e <= i + bit - 1; e++) {
-            cout << "databit " << e << ": " << binaryNumberVector.at(e) << endl;
+            //cout << "databit " << e << ": " << binaryNumberVector.at(e) << endl;
             parityVector.at(e) = binaryNumberVector.at(e);
             if (binaryNumberVector.at(e) == 1) {
                 oneBitSum++;
             }
-            cout << "sum: " << oneBitSum << endl;
+            //cout << "sum: " << oneBitSum << endl;
             if (e == binaryNumberVector.size() - 1) {
                 break;
             }
         }
         i = i + increment;
     }
-    cout << "Final sum = "<< oneBitSum << "  . . .";
+   // cout << "Final sum = "<< oneBitSum << "  . . .";
     if (oneBitSum%2 == 0){
         if (evenParityBool){
             cout << " Even ";
-            parity = 1;
+            *parityBit = 1;
         } else{
             cout << " Odd ";
         }
     } else {
         if (!evenParityBool){
             cout << " Odd ";
-            parity = 1;
+            *parityBit = 1;
         } else {
             cout << " Even ";
         }
     }
     switch(bit){
         case 1:
-            parityBit1 = parity;
-            //parity1BinaryNumberVector = parityVector;
             generateParityVectorWithParity(bit, parityVector, &parity1BinaryNumberVector);
             break;
         case 2:
-            parityBit2 = parity;
-            //parity2BinaryNumberVector = parityVector;
             generateParityVectorWithParity(bit, parityVector, &parity2BinaryNumberVector);
             break;
         case 4:
-            parityBit4 = parity;
-            //parity2BinaryNumberVector = parityVector;
             generateParityVectorWithParity(bit, parityVector, &parity4BinaryNumberVector);
             break;
         case 8:
-            parityBit8 = parity;
-            //parity8BinaryNumberVector = parityVector;
             generateParityVectorWithParity(bit, parityVector, &parity8BinaryNumberVector);
             break;
     }
 
-    cout << "Parity: " << parity << endl;
+    cout << "Parity: " <<  *parityBit << endl;
 }
 
 void Hamming::generateBinaryNumberVectorWithParity(bool parity, vector<int> *binaryVectorWithParity) {
-    //cout << "Generating binary number vector . . . " << endl;
-    int tempBinaryNumber = binaryNumber;
-    for (int i = 15; i >= 0; i--){
+    int index = 0;
+
+    for (int i = 0; i <= 15; i++){
         if (i == 0 || i == 1 || i == 3 || i == 7){
             if (parity){
                 switch(i){
@@ -150,15 +156,13 @@ void Hamming::generateBinaryNumberVectorWithParity(bool parity, vector<int> *bin
                 binaryVectorWithParity->at(i) = -1;
             }
         } else {
-            int currentBit = tempBinaryNumber % 10;
-            binaryVectorWithParity->at(i) = currentBit;
-            tempBinaryNumber = tempBinaryNumber/10;
+            binaryVectorWithParity->at(i) = binaryNumberVector.at(index);
+            index++;
         }
     }
 }
 
 void Hamming::generateParityVectorWithParity(int bit, vector<int> vec, vector<int> *vecWithParity) {
-    int tempBinaryNumber = binaryNumber;
     int index = 0;
 
     for (int i = 0; i <= 15; i++){
@@ -204,7 +208,7 @@ void Hamming::printVectorContents(string vectorName, vector<int> vector) {
     cout << endl;
 }
 
-void Hamming::printParityTable() {
+void Hamming::printParityTable1() {
     int pIndex = 1;
     int dIndex = 1;
 
@@ -229,3 +233,71 @@ void Hamming::printParityTable() {
     printVectorContents("p8         ", parity8BinaryNumberVector);
     printVectorContents("with parity", binaryNumberVectorWithParity);
 }
+
+void Hamming::modifyDataBit(int position) {
+    modifyDataBitVector(position, &binaryNumberVector);
+    generateHammingCode();
+}
+
+void Hamming::modifyDataBitVector(int position, vector<int> *vec) {
+    int index = 0;
+    position = position - 1;
+    if (vec->size() == 12){
+        for (int i = 0; i <= 11; i++){
+            if (i == position){
+   //             vec->at(i) = 5;
+                if (vec->at(i) == 0){
+                    vec->at(i) = 1;
+                }
+                if (vec->at(i) == 1){
+                    vec->at(i) = 0;
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i <= 15; i++){
+            if (i == 0 || i == 1 || i == 3 || i == 7) {
+                index = index;
+            } else {
+                if (index == position){
+                   // vec->at(index) = 5;
+                    if (vec->at(index) == 0){
+                        vec->at(index) = 1;
+                    } else {
+                        vec->at(index) = 0;
+                    }
+
+                }
+                index++;
+            }
+        }
+    }
+}
+
+void Hamming::printParityTable2() {
+    int pIndex = 1;
+    int dIndex = 1;
+
+    cout << endl;
+    cout << "       Table No. 1: Parity bit Calculation with Hamming Code" << endl;
+    cout << "             ";
+    for (int i = 1; i <= 16; i++){
+        if (i == 1 || i == 2 || i == 4 || i == 8){
+            cout << "p" << pIndex;
+            pIndex = pIndex*2;
+        }   else {
+            cout << "d" << dIndex;
+            dIndex++;
+        }
+        cout << " ";
+    }
+    cout << endl;
+    printVectorContents("no   parity", binaryNumberVectorWithoutParity);
+    printVectorContents("p1         ", parity1BinaryNumberVector);
+    printVectorContents("p2         ", parity2BinaryNumberVector);
+    printVectorContents("p4         ", parity4BinaryNumberVector);
+    printVectorContents("p8         ", parity8BinaryNumberVector);
+    printVectorContents("with parity", binaryNumberVectorWithParity);
+}
+
+

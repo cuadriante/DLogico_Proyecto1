@@ -34,8 +34,17 @@ int main() {
                     if (inputParity()){
                         cout << "Great!" << endl;
                         hamming.generateHammingCode(num.decimal_to_binary());
+
+                        cout << "Which data bit position would you like to change? (Range: 1-12)" << endl;
+                        int pos;
+                        cin >> pos;
+                        if (1 <= pos && pos <= 12){
+                            hamming.modifyDataBit(pos);
+                        }
+
+
                     } else {
-                        inputParity();
+                        cout << "Invalid parity." << endl;
                     }
 
                 }
@@ -67,7 +76,7 @@ bool inputParity() {
     if (hamming.verify(parityInput)){
         return true;
     } else {
-        cout << "Invalid parity." << endl;
+
         return false;
     }
 }
