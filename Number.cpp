@@ -158,6 +158,49 @@ string Number::decimal_to_binary(){
         }
         dividend = dividend / 2;
     }
+
+    int post_len = result.length();
+    if (post_len < 24){
+        while (post_len < 24){
+            result = "0 " + result;
+            post_len += 2;
+        }
+    }
+
     num_binary = result;
     return num_binary;
+}
+
+string Number::binary_to_NRZI(){
+    int len = num_binary.length();
+    string result;
+    int j;
+    for (int i = 0; i < len; i += 2) {
+        if (i > 0){
+            if (num_binary[i] == '0'){
+                result += result[j-1];
+            }
+            else{
+                if (result[j-1] == '_'){
+                    result += "|-";
+                }
+                else{
+                    result += "|_";
+                }
+                j += 1;
+            }
+            j += 1;
+        }
+        else {
+            if (num_binary[i] == '0'){
+                result = "_";
+                j = 1;
+            }
+            else{
+                result = "|-";
+                j = 2;
+            }
+        }
+    }
+    return result;
 }

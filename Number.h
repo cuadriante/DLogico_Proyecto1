@@ -22,6 +22,8 @@ public:
     int decimal_to_octal();
 
     string decimal_to_binary();
+
+    string binary_to_NRZI();
 };
 
 #endif //DLOGICO_PROYECTO1_NUMBER_H

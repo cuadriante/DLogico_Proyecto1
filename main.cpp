@@ -31,6 +31,9 @@ int main() {
                     cout << "The number in the decimal form is: " << num.hex_to_decimal(input) << endl; //the valid hexadecimal input in decimal
                     cout << "The number in the binary form is: " << num.decimal_to_binary() << endl;
                     cout << "The number in the octal form is: " << num.decimal_to_octal() << endl;
+
+                    cout << "The number in NRZI Form is: " << num.binary_to_NRZI() << endl;
+
                     if (inputParity()){
                         cout << "Great!" << endl;
                         hamming.generateHammingCode(num.decimal_to_binary());
